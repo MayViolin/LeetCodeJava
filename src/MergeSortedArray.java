@@ -6,52 +6,46 @@
 public class MergeSortedArray {
 
     public void insert(int A[], int m, int pos, int elem) {
-        int i = m;
-        while (i > pos) {
-            A[i] = A[i-1];
+        int i = m-1;
+        while (i >= pos) {
+            A[i+1] = A[i];
             i--;
         }
-        A[i] = elem;
+        A[i+1] = elem;
     }
 
     public void merge(int A[], int m, int B[], int n) {
         int i = 0;
         int j = 0;
-        //int size = m;
-        while ((i < m+n) && j < n) {
-            if (B[j] <= A[i]) {
-                System.out.println("in if " + B[j]);
-                int pos = m;
-                while (pos > i) {
-                    A[pos] = A[pos-1];
-                    pos--;
-                }
-                A[pos] = B[j];
-                for (int elem : A) {
-                    System.out.print(elem + " ");
-                }
-                m++;
+        int size = m;
+
+        while (i < size && j < n) {
+            if (B[j] < A[i]) {
+                insert(A, size, i, B[j]);
+                size++;
                 i++;
                 j++;
+            } else {
+                i++;
             }
-            i++;
         }
 
-        System.out.println(j);
         while (j < n) {
-            insert(A, m, m, B[j]);
-            m++;
+            insert(A, size, i, B[j]);
+            size++;
+            i++;
+            j++;
         }
     }
 
     public static void main(String[] args) {
         int[] a = new int[10];
-        int[] b = {2,4,6};
-        for (int i = 0; i < 5; i++) {
-            a[i] = i+1;
-        }
+        int[] b = {-1,0,2,3,5,6};
+        a[0] = 1;
+        a[1] = 2;
+        a[2] = 4;
         MergeSortedArray test = new MergeSortedArray();
-        test.merge(a, 5, b, 3);
+        test.merge(a, 3, b, 6);
         for (int i = 0; i < 9; i++) {
             System.out.println("a[i]:" + a[i]);
         }
