@@ -27,25 +27,28 @@ public class LongestSubString {
                     count++;
                     ++j;
                 } else {
-                    //characters.clear();
+//                    characters.clear();
                     if (count > maxLength) {
                         maxLength = count;
                     }
                     count = 0;
+                    i = characters.get(ch) + 1;
+                    characters.clear();
                     break;
                 }
             }
-            String subString = s.substring(i,j);
-            if (s.substring(j).contains(subString) && subString.length() >= maxLength) {
-                i = j + s.substring(j).indexOf(subString);
-            } else {
-                if (j < s.length()) {
-                    i = characters.get(s.charAt(j)) + 1;
-                } else {
-                    i = j;
-                }
-            }
-            characters.clear();
+
+//            String subString = s.substring(i,j);
+//            if (s.substring(j).contains(subString) && subString.length() >= maxLength) {
+//                i = j + s.substring(j).indexOf(subString);
+//            } else {
+//                if (j < s.length()) {
+//                    i = characters.get(s.charAt(j)) + 1;
+//                } else {
+//                    i = j;
+//                }
+//            }
+            //characters.clear();
         }
         if (count > maxLength) {
             maxLength = count;
